@@ -1,0 +1,8 @@
+<i class="fa fa-star fa-5x" (click)="favorite = !favorite" [class.fa-star]="favorite" [class.fa-star-o]="!favorite"></i>
+
+<div>
+  <input type="text" [(ngModel)]="title">
+  <h3>{{title | titlecase}}</h3>
+</div>
+
+
