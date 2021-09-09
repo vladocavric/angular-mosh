@@ -1,4 +1,32 @@
 <h1>Angular</h1>
+<hr>
+<app-zeppy title="nesto sasvim novo">
+  <ng-container>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci at, dolor earum eius eligendi eveniet
+    facere fugiat libero maxime nemo nesciunt non, possimus provident qui sequi suscipit, voluptates. Ex, possimus.
+  </ng-container>
+</app-zeppy>
+<app-zeppy title="ovo je 2. zeppi">
+  <ng-container>
+    Nullam quis ante. Nulla porta dolor.
+    Nullam dictum felis eu pede mollis pretium. Fusce vel dui.
+  </ng-container>
+</app-zeppy>
+<hr>
+<input type="text" appFormatInput pattern="[0-9]">
+<hr>
+<app-nav></app-nav>
+<hr>
+<app-tweeter-like [count]="tweet.likeCount" [isLiked]="tweet.isLiked" (like)="tweetChange()">
+  <ng-container class="tweeter-body" >{{tweet.body}}</ng-container>
+</app-tweeter-like>
+<hr>
 <app-courses></app-courses>
 <app-authors></app-authors>
-<app-favorite></app-favorite>
+<app-favorite (someChange)="onChange($event)"></app-favorite>
+<hr>
+<app-bootstrap-panel>
+  <ng-container>Badass</ng-container>
+  <div class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis debitis earum odio sed sint sit soluta. Ab, alias error eveniet exercitationem, ipsa labore neque nihil nulla numquam, omnis quisquam sequi!</div>
+</app-bootstrap-panel>
+<hr>

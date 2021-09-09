@@ -1,0 +1,15 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" (click)="viewMode = 'map'" [class.active]="viewMode === 'map'">Map</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" (click)="viewMode = 'tap'" [class.active]="viewMode === 'tap'">Tap</a>
+  </li>
+</ul>
+
+<div [ngSwitch]="viewMode">
+  <p *ngSwitchCase="'map'">This is map switch case</p>
+  <p *ngSwitchCase="'tap'">This is tap switch case</p>
+  <p *ngSwitchDefault>This is default switch case</p>
+</div>
+

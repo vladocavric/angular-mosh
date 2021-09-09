@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-header">
+    Tweet
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <ng-content select=".tweeter-body"></ng-content>
+    </p>
+  </div>
+  <div class="card-footer">
+    <i class="fa fa-heart gray" aria-hidden="true" (click)="onLike()" [class.pink]="isLiked"></i>
+    <span class="count">{{ count }}</span>
+  </div>
+</div>

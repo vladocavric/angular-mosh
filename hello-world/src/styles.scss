@@ -1,2 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.min.css";
+
+
+.gray {
+  color: #ccc;
+}
+
+.pink {
+  color: deeppink;
+}
+
+.fa.fa-heart, .count {
+  font-size: 55px!important;
+}
+
+.fa:hover {
+  cursor: pointer;
+}
+
