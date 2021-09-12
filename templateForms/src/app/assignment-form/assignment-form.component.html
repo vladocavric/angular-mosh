@@ -1,0 +1,42 @@
+<div class="container">
+  <h1>Assignment Form</h1>
+  <form (ngSubmit)="onSubmit(f, courseName)" #f="ngForm">
+    <div class="form-group mb-3">
+      <label for="courseName">Course Name</label>
+      <input type="text" class="form-control mb-3" id="courseName"
+             placeholder="Course Name"
+             ngModel name="courseName"
+             #courseName="ngModel"
+             required
+             minlength="5">
+      <div class="alert alert-danger" *ngIf="courseName.invalid && courseName.touched">
+        <p *ngIf="courseName.control.errors?.required" class="mb-0">Course Name field is required</p>
+        <p *ngIf="courseName.control.errors?.minlength" class="mb-0">
+          Course Name should have minimum {{courseName.control.errors?.minlength.requiredLength}} characters,
+          you need anther
+          {{courseName.control.errors?.minlength.requiredLength - courseName.control.errors?.minlength.actualLength}}
+        </p>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label for="category">Category</label>
+      <select class="form-control mb-3" id="category" ngModel name="category" required #category="ngModel">
+        <option value="" selected></option>
+        <option *ngFor="let category of categories" [ngValue]="category">{{category.category}}</option>
+      </select>
+      <div class="alert alert-danger" *ngIf="category.invalid && category.touched">
+        <p *ngIf="category.control.errors?.required" class="mb-0">Category field is required</p>
+      </div>
+    </div>
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="guarantee" ngModel name="guarantee">
+      <label class="form-check-label" for="guarantee">
+        30-day money-back guarantee
+      </label>
+    </div>
+    <div class="mb-3">{{f.value | json}}</div>
+    <div>
+      <button class="btn btn-primary" [disabled]="f.invalid">Create</button>
+    </div>
+  </form>
+</div>
