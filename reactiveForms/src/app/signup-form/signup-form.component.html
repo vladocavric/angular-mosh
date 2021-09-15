@@ -1,17 +1,55 @@
-<form>
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input 
-            id="username" 
-            type="text" 
-            class="form-control">
+<form [formGroup]="signUp" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input
+      id="username"
+      type="text"
+      class="form-control"
+      [formControlName]="'username'">
+    <div class="alert alert-danger" *ngIf="username.invalid && username.touched">
+      <p *ngIf="username.errors?.required">Username is required</p>
+      <p *ngIf="username.errors?.email">Username needs to be an email</p>
+      <p *ngIf="username.errors?.minlength">Username needs to be at least 5 characters</p>
+      <p *ngIf="username.errors?.canNotContainSpace">Username can not contain spaces</p>
+      <p *ngIf="username.errors?.emailNotUnique">Username needs to be unique</p>
     </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input 
-            id="password" 
-            type="text" 
-            class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      id="password"
+      type="text"
+      class="form-control"
+      [formControlName]="'password'">
+    <div class="alert alert-danger" *ngIf="password.invalid && password.touched">
+      <p *ngIf="password.errors?.required">Password is required</p>
+      <p *ngIf="password.errors?.minlength">Password needs to be at least 6 characters</p>
     </div>
-    <button class="btn btn-primary" type="submit">Sign Up</button>
+  </div>
+  <div class="form-group" formGroupName="address">
+    <label for="street">Street</label>
+    <input type="text" id="street" formControlName="street" class="form-control">
+    <label for="city">City</label>
+    <input type="text" id="city" formControlName="city" class="form-control">
+    <label for="zipCode">Zip Code</label>
+    <input type="text" id="zipCode" formControlName="zipCode" class="form-control">
+  </div>
+  <div class="form-group" *ngIf="openHobby">
+    <label for="hobby">Add Hobby</label>
+    <input type="text" id="hobby" (keyup.enter)="onAddTopic(hobby.value)" class="form-control" #hobby>
+  </div>
+
+
+  <div>
+    <button class="btn btn-primary" type="submit" [disabled]="!signUp.valid">Sign Up</button>
+    <button type="button" (click)="openHobby = !openHobby" class="btn"
+            [ngClass]="{'btn-success': !openHobby, 'btn-danger': openHobby}">{{!openHobby ? 'Open Topic' : 'Close Topic'}}</button>
+  </div>
 </form>
+
+<ul class="list-group" *ngIf="topics.length > 0">
+  <li class="list-group-item" *ngFor="let topic of topics.controls; index as i" (click)="onDelete(i)">{{topic.value.name}}</li>
+</ul>
+
+
+<app-loader *ngIf="username.pending"></app-loader>
