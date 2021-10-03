@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
+import {FirebaseService} from './services/firebase.service';
 
 @Component({
   selector: 'app-root',
@@ -8,19 +9,20 @@ import {environment} from '../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private fbService: FirebaseService) {
   }
 
   title = 'fbDemo';
 
   onClick(): void {
-    this.http.post(`${environment.firebase.databaseURL}/post.json`, {
-      title: 'nesto 1',
-      tekst: 'neki tekst'
-    }).subscribe(res => console.log(res));
+    this.fbService.addOne({text: 'novi tekst', title: 'novi title'}).subscribe(res => console.log(res));
   }
 
-  getPosts() {
-    this.http.get(`${environment.firebase.databaseURL}/post.json`).subscribe(posts => console.log(posts))
+  getPosts(): void {
+    this.fbService.getAll().subscribe(posts => console.log(posts));
+  }
+
+  deletePost(id: string): void {
+    this.fbService.deleteOne(id).subscribe();
   }
 }

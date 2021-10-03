@@ -1,0 +1,29 @@
+<div class="container">
+  <app-add-item></app-add-item>
+  <div class="container">
+    <ul *ngFor="let item of items" class="collection">
+      <li class="collection-item">
+        <strong>{{item.title}}: </strong>
+        {{item.description}}
+        <a href="#" class="secondary-content">
+          <i *ngIf="!editState && (itemToEdit == undefined || itemToEdit.id !== item.id)" (click)="onEdit(item)" class="fa fa-pencil"></i>
+          <i *ngIf="editState && itemToEdit.id === item.id" (click)="editState = !editState" class="fa fa-compress"></i>
+        </a>
+          <div *ngIf="editState && itemToEdit.id === item.id">
+            <form (ngSubmit)="onUpdate(item)">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input type="text"  [(ngModel)]="item.title" name="title">
+                </div>
+                <div class="input-field col s6">
+                  <input type="text" [(ngModel)]="item.description" name="description">
+                </div>
+              </div>
+              <button class="btn btn-block">Update</button>
+              <button class="btn btn-block red" type="button" (click)="onDelete(item.id)">Delete</button>
+            </form>
+          </div>
+      </li>
+    </ul>
+  </div>
+</div>
