@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "course-project-mosh": "course-project-mosh",
+    "default": "course-project-mosh"
+  },
+  "targets": {
+    "course-project-mosh": {
+      "hosting": {
+        "course-project": [
+          "course-project-mosh"
+        ]
+      }
+    }
+  }
+}
